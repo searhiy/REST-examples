@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>spring-jax-rs</artifactId>
+    <packaging>war</packaging>
+
+    <name>spring-jax-rs</name>
+    <url>http://maven.apache.org</url>
+
+    <parent>
+        <artifactId>rest</artifactId>
+        <groupId>examples</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <java.version>1.6</java.version>
+        <spring.version>3.1.0.RELEASE</spring.version>
+        <cglib.version>2.2.2</cglib.version>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>springsource-milestones</id>
+            <name>SpringSource Milestones Proxy</name>
+            <url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <finalName>spring-jax-rs</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.22</version>
+                <configuration>
+                    <contextPath>/${project.artifactId}</contextPath>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8082</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <stopPort>9966</stopPort>
+                    <stopKey>stop</stopKey>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
