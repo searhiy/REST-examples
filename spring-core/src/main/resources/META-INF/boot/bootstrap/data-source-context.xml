@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- Declare a datasource that has pooling capabilities with BoneCP-->
+    <bean id="ldDataSource"
+          class="com.jolbox.bonecp.BoneCPDataSource"
+          destroy-method="close"
+          p:driverClass="${jdbc.driver}"
+          p:jdbcUrl="${jdbc.url}"
+          p:user="${jdbc.user}"
+          p:password="${jdbc.password}"
+          p:idleMaxAgeInMinutes="240"
+          p:idleConnectionTestPeriodInMinutes="60"
+          p:acquireIncrement="10"
+          p:maxConnectionsPerPartition="60"
+          p:minConnectionsPerPartition="20"
+          p:statementsCacheSize="50"/>
+
+    <!-- Declare a JPA entityManagerFactory-->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"></property>
+        <property name="persistenceUnitName" value="hibernatePersistenceUnit"/>
+        <property name="dataSource" ref="ldDataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl}"/>
+                <entry key="hibernate.show_sql" value="${hibernate.show.sql}"/>
+                <entry key="hibernate.dialect" value="${hibernate.dialect}"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Declare a transaction manager-->
+    <bean id="entityTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="entityTransactionManager"/>
+
+</beans>

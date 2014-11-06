@@ -1,0 +1,12 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+    <persistence-unit name="hibernatePersistenceUnit" transaction-type="RESOURCE_LOCAL">
+        <properties>
+            <property name="hibernate.hbm2ddl.import_files_sql_extractor"
+                      value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor"/>
+            <!--<property name="hibernate.hbm2ddl.import_files"
+                      value="/resources/data/orders.sql"/>-->
+        </properties>
+    </persistence-unit>
+
+</persistence>

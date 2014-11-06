@@ -1,0 +1,1 @@
+INSERT INTO orders (order_number, order_date) VALUES ('N4E-12N-WK8-KS3','2014-10-25');

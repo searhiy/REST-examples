@@ -8,8 +8,6 @@
     <name>REST-examples</name>
 
     <properties>
-        <cglib.version>2.2.2</cglib.version>
-
         <jetty.version>6.1.22</jetty.version>
 
         <slf4j.version>1.7.7</slf4j.version>
@@ -17,58 +15,13 @@
     </properties>
 
     <modules>
+        <module>spring-parent</module>
+        <module>spring-core</module>
         <module>spring-mvc-rest</module>
         <module>spring-jax-rs</module>
     </modules>
 
     <dependencies>
-
-        <!-- Spring core & mvc -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <type>jar</type>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- CGLib for @Configuration -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-            <version>${cglib.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-
-        <!-- Servlet Spec -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.4</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- Embedded Web Container -->
         <dependency>
@@ -111,18 +64,13 @@
             <artifactId>logback-access</artifactId>
             <version>${logback.version}</version>
         </dependency>
-    </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>1.0.2.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <!-- Embedded db -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+    </dependencies>
 
 </project>

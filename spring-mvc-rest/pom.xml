@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>rest</artifactId>
-        <groupId>examples</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-mvc-rest</artifactId>
+    <groupId>examples</groupId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>spring-mvc-rest</name>
-    <url>http://maven.apache.org</url>
+
+    <parent>
+        <artifactId>spring-parent</artifactId>
+        <groupId>examples</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../spring-parent</relativePath>
+    </parent>
 
     <properties>
-        <java.version>1.6</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>springsource-milestones</id>
-            <name>SpringSource Milestones Proxy</name>
-            <url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
-        </repository>
-    </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>examples</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <finalName>spring-mvc-rest</finalName>

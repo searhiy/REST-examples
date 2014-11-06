@@ -8,31 +8,25 @@
     <packaging>war</packaging>
 
     <name>spring-jax-rs</name>
-    <url>http://maven.apache.org</url>
 
     <parent>
-        <artifactId>rest</artifactId>
+        <artifactId>spring-parent</artifactId>
         <groupId>examples</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../spring-parent</relativePath>
     </parent>
 
     <properties>
-        <java.version>1.6</java.version>
-        <spring.version>3.1.0.RELEASE</spring.version>
-        <cglib.version>2.2.2</cglib.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>examples</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>springsource-milestones</id>
-            <name>SpringSource Milestones Proxy</name>
-            <url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
-        </repository>
-    </repositories>
 
     <build>
         <finalName>spring-jax-rs</finalName>
