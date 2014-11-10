@@ -8,15 +8,19 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "orders")
+//@JsonAutoDetect
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
+    //@JsonProperty
     private int id;
-    @Column(name = "order_number", nullable = false)
+    @Column(name = "order_number", nullable = false, unique = true)
+    //@JsonProperty
     private String orderNumber;
     @Column(name = "order_date", nullable = false)
+    //@JsonProperty
     private Date date;
 
     public int getId() {

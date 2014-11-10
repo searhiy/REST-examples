@@ -20,6 +20,9 @@
         <cglib.version>2.2.2</cglib.version>
 
         <bonecp.version>0.8.0.RELEASE</bonecp.version>
+
+        <mockito.version>1.10.8</mockito.version>
+        <testng.version>6.8.8</testng.version>
     </properties>
 
     <dependencies>
@@ -50,6 +53,20 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Testing dependencies -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>

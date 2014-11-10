@@ -30,9 +30,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>-->
 
-    <!-- Activates various annotations to be detected in bean classes -->
     <context:annotation-config/>
-
     <!-- Scans the classpath for annotated components that will be auto-registered
         as Spring beans. For example @Controller and @Service. Make sure to set the
         correct base-package -->
