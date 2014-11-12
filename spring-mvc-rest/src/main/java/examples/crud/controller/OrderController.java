@@ -1,7 +1,7 @@
-package examples.controller;
+package examples.crud.controller;
 
-import examples.domain.Order;
-import examples.service.OrderService;
+import examples.crud.domain.Order;
+import examples.crud.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by serhii on 06.11.14.
  */
 @Controller
-@RequestMapping("/rest")
+@RequestMapping("/crud")
 public class OrderController {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);

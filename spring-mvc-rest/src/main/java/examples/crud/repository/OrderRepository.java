@@ -1,6 +1,6 @@
-package examples.repository;
+package examples.crud.repository;
 
-import examples.domain.Order;
+import examples.crud.domain.Order;
 import org.springframework.data.repository.CrudRepository;
 
 /**

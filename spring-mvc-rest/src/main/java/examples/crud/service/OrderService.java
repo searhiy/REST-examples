@@ -1,6 +1,6 @@
-package examples.service;
+package examples.crud.service;
 
-import examples.domain.Order;
+import examples.crud.domain.Order;
 
 /**
  * Created by serhii on 06.11.14.

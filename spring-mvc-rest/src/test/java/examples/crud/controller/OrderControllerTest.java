@@ -1,4 +1,4 @@
-package examples.controller;
+package examples.crud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
