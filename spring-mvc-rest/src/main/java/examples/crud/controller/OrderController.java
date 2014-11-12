@@ -27,8 +27,6 @@ public class OrderController {
     public
     @ResponseBody
     Order getOrder(@PathVariable("orderNumber") String orderNumber) {
-        //MediaType.APPLICATION_JSON_VALUE
-
         logger.info("getting user by order number={} from database", orderNumber);
         return orderServiceIml.findByOrderNumber(orderNumber);
     }

@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
  * Created by serhii on 06.11.14.
  */
 @ContextConfiguration(locations = {"classpath:META-INF/boot/applicationContext.xml",
-        "classpath:examples/crud/service/test-mvc-servlet.xml"}, loader = ContextLoader.class)
+        "classpath:examples/crud/test-mvc-servlet.xml"}, loader = ContextLoader.class)
 public class OrderServiceTest extends AbstractTestNGSpringContextTests {
 
     @Autowired

@@ -10,19 +10,18 @@ import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.hamcrest.Matchers.is;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
- * Created by serhii on 10.11.14.
+ * Created by serhii on 12.11.14.
  */
 @ContextConfiguration(locations = {"classpath:META-INF/boot/applicationContext.xml",
         "classpath:examples/crud/test-mvc-servlet.xml"}, loader = ContextLoader.class)
 @WebAppConfiguration
-public class OrderControllerTest extends AbstractTestNGSpringContextTests {
+public class HomeControllerTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private WebApplicationContext wac;
@@ -34,13 +33,10 @@ public class OrderControllerTest extends AbstractTestNGSpringContextTests {
         this.mockMvc = webAppContextSetup(wac).build();
     }
 
-    public final static String ORDER_NUMBER = "N1E-12N-WK8-KS3";
-
     @Test
-    public void testGettingOrder() throws Exception {
-        mockMvc.perform(get("/crud/orders/" + ORDER_NUMBER).accept(APPLICATION_JSON))
+    public void testGettingHomePage() throws Exception {
+        mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(APPLICATION_JSON))
-                .andExpect(jsonPath("$.date", is(1400965200000L)));
+                .andExpect(forwardedUrl("/WEB-INF/jsp/home.jsp"));
     }
 }
