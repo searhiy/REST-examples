@@ -28,7 +28,7 @@ public class OrderServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testGettingOrder() {
         OrderService orderService = (OrderService) applicationContext.getBean("order_service");
-        Order order = orderService.findByOrderNumber(ORDER_NUMBER);
+        Order order = orderService.findOrder(1);
 
         Assert.assertEquals(sdf.format(order.getDate()), EXPECTED_DATE, "wrong date");
     }
