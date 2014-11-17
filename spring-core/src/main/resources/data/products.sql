@@ -1,0 +1,1 @@
+INSERT INTO products (market_name, price, quantity) VALUES ('iCup', 5.99, 6);

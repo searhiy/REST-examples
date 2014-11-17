@@ -1,0 +1,1 @@
+INSERT INTO clients (name, surname) VALUES ('Mike','Wilson');
