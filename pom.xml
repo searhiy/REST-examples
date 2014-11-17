@@ -17,8 +17,15 @@
 
     <modules>
         <module>spring-parent</module>
-        <module>spring-core</module>
-        <module>spring-mvc-rest</module>
+        <module>spring-rest-core</module>
+        <module>spring-rest-caching</module>
+        <module>spring-rest-crud</module>
+        <module>spring-rest-hateoas</module>
+        <module>spring-rest-dto</module>
+        <module>spring-rest-exceptions</module>
+        <module>spring-rest-messageconv</module>
+        <module>spring-rest-client</module>
+        <module>spring-rest-versions</module>
         <module>spring-jax-rs</module>
     </modules>
 
