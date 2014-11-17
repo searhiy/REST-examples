@@ -24,27 +24,28 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Product saveOrder(Product product) {
+    public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
 
     @Override
-    public Product findOrder(int id) {
+    public Product findProduct(int id) {
         return productRepository.findById(id);
     }
 
     @Override
-    public void deleteOrder(int id) {
+    public void deleteProduct(int id) {
         Product product = productRepository.findById(id);
         productRepository.delete(product);
     }
 
     @Override
-    public List<Product> list(int page, int size) {
-        return Lists.newArrayList(productRepository.findAll(
+    public List<Product> list(int orderId, int page, int size) {
+        return Lists.newArrayList(productRepository.findByOrderId(
+                orderId,
                 new PageRequest(
                         page,
-                        size)).getContent());
+                        size)));
     }
 
     @Override

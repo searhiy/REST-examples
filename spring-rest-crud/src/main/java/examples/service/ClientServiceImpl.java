@@ -24,17 +24,17 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
 
     @Override
-    public Client saveOrder(Client client) {
+    public Client saveClient(Client client) {
         return clientRepository.save(client);
     }
 
     @Override
-    public Client findOrder(int id) {
+    public Client findClient(int id) {
         return clientRepository.findById(id);
     }
 
     @Override
-    public void deleteOrder(int id) {
+    public void deleteClient(int id) {
         Client client = clientRepository.findById(id);
         clientRepository.delete(client);
     }

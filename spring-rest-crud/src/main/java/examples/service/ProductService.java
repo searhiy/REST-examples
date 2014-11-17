@@ -10,13 +10,13 @@ import java.util.Map;
  */
 public interface ProductService {
 
-    public Product saveOrder(Product product);
+    public Product saveProduct(Product product);
 
-    public Product findOrder(int id);
+    public Product findProduct(int id);
 
-    public void deleteOrder(int id);
+    public void deleteProduct(int id);
 
-    public List<Product> list(int page, int size);
+    public List<Product> list(int orderId, int page, int size);
 
     public List<Product> sortedList(int page, int size, Map<String, String> sort);
 

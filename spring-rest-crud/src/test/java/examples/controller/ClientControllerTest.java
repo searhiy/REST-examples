@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ContextConfiguration(locations = {"classpath:META-INF/boot/applicationContext.xml",
         "classpath:examples/crud/test-mvc-servlet.xml"}, loader = ContextLoader.class)
 @WebAppConfiguration
-public class OrderControllerTest extends AbstractTestNGSpringContextTests {
+public class ClientControllerTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private WebApplicationContext wac;
@@ -35,10 +35,20 @@ public class OrderControllerTest extends AbstractTestNGSpringContextTests {
     }
 
     public final static int ORDER_NUMBER = 1;
+    public final static int CLIENT_NUMBER = 1;
 
     @Test
+    public void testGettingClient() throws Exception {
+        mockMvc.perform(get("/clients/" + CLIENT_NUMBER).accept(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON))
+                .andExpect(jsonPath("$.name", is("Mike")));
+    }
+
+    //@Test
     public void testGettingOrder() throws Exception {
-        mockMvc.perform(get("/orders/" + ORDER_NUMBER).accept(APPLICATION_JSON))
+        mockMvc.perform(get("/clients/" + CLIENT_NUMBER +
+                            "/orders/" + ORDER_NUMBER).accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON))
                 .andExpect(jsonPath("$.date", is(1400965200000L)));

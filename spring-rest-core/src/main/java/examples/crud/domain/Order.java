@@ -1,6 +1,7 @@
 package examples.crud.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "orders")
-@JsonAutoDetect
+@JsonAutoDetect(fieldVisibility=JsonAutoDetect.Visibility.NONE)
 public class Order {
 
     @Id
@@ -26,9 +27,15 @@ public class Order {
     @Column(name = "order_date", nullable = false)
     @JsonProperty
     private Date date;
+    @Column(name = "client_id", nullable = false)
+    @JsonIgnore
+    private int clientId;
 
-    @ManyToMany
-    @JoinTable(name = "order_has_products", joinColumns = {@JoinColumn(name = "order_id")}, inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    /*@ManyToMany
+    @JoinTable(name = "order_has_products", joinColumns = {@JoinColumn(name = "order_id")}, inverseJoinColumns = {@JoinColumn(name = "product_id")})*/
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    @JsonIgnore
     private List<Product> products;
 
     public int getId() {
@@ -53,6 +60,14 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

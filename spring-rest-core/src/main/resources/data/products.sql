@@ -1,1 +1,1 @@
-INSERT INTO products (market_name, price, quantity) VALUES ('iCup', 5.99, 6);
+INSERT INTO products (market_name, price, quantity, order_id) VALUES ('iCup', 5.99, 1, 1);

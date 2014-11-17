@@ -1,7 +1,11 @@
 package examples.controller;
 
+import examples.crud.domain.Client;
 import examples.crud.domain.Order;
+import examples.crud.domain.Product;
+import examples.service.ClientService;
 import examples.service.OrderService;
+import examples.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,57 +14,101 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by serhii on 06.11.14.
  */
 @RestController
-@RequestMapping(value = "/orders", produces = MediaType.APPLICATION_JSON_VALUE)
-public class OrderController {
+@RequestMapping(value = "/clients", produces = MediaType.APPLICATION_JSON_VALUE)
+public class ClientController {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     @Autowired
-    private OrderService orderServiceIml;
+    private OrderService orderService;
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private ProductService productService;
 
-    @RequestMapping(
+    /*@RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public Order create(@RequestBody Order order) {
         logger.info("creating {}", order.toString());
-        return orderServiceIml.saveOrder(order);
+        return orderService.saveClient(order);
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET, value = "")
+    public List<Client> listClients(@RequestParam(value = "page", defaultValue = "0") int page,
+                                  @RequestParam(value = "size", defaultValue = "10") int size) {
+        logger.info("getting orders");
+        return clientService.list(page, size);
     }
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/{id}")
+            value = "/{client_id}")
     @ResponseStatus(HttpStatus.OK)
-    public Order read(@PathVariable int id) {
-        logger.info("reading order by id={}", id);
-        return orderServiceIml.findOrder(id);
+    public Client gettingClient(@PathVariable int client_id) {
+        logger.info("reading client by id={}", client_id);
+        return clientService.findClient(client_id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{client_id}/orders")
+    public List<Order> listOrders(@PathVariable int client_id,
+                            @RequestParam(value = "page", defaultValue = "0") int page,
+                            @RequestParam(value = "size", defaultValue = "10") int size) {
+        logger.info("getting orders");
+        return orderService.list(client_id, page, size);
     }
 
     @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/{client_id}/orders/{order_id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Order gettingOrder(@PathVariable int order_id) {
+        logger.info("reading order by order_id={}", order_id);
+        return orderService.findOrder(order_id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{client_id}/orders/{order_id}/products")
+    public List<Product> listProducts(@PathVariable int order_id,
+                            @RequestParam(value = "page", defaultValue = "0") int page,
+                            @RequestParam(value = "size", defaultValue = "10") int size) {
+        logger.info("getting orders");
+        return productService.list(order_id, page, size);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/{client_id}/orders/{order_id}/products/{product_id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Product gettingProduct(@PathVariable int product_id) {
+        logger.info("reading order by order_id={}", product_id);
+        return productService.findProduct(product_id);
+    }
+
+    /*@RequestMapping(
             method = RequestMethod.PUT,
             value = "/{id}")
     public Order replace(@PathVariable int id, @RequestBody Order order) {
-        Order dbOrder = orderServiceIml.findOrder(id);
+        Order dbOrder = orderService.findClient(id);
 
         // here you can use some mapper (merge)
         dbOrder.setOrderNumber(order.getOrderNumber());
         dbOrder.setDate(order.getDate());
 
         logger.info("updating {}", dbOrder.toString());
-        return orderServiceIml.saveOrder(dbOrder);
-    }
+        return orderService.saveClient(dbOrder);
+    }*/
 
-    @RequestMapping(
+    /*@RequestMapping(
             method = RequestMethod.PATCH,
             value = "/{id}")
     public Order update(@PathVariable int id, @RequestBody Order order) {
-        Order dbOrder = orderServiceIml.findOrder(id);
+        Order dbOrder = orderService.findClient(id);
 
         // here you can use validators or some addition logic (dto)
         if (order.getOrderNumber() != null) {
@@ -71,24 +119,24 @@ public class OrderController {
         }
 
         logger.info("updating {}", order.toString());
-        return orderServiceIml.saveOrder(order);
-    }
+        return orderService.saveClient(order);
+    }*/
 
-    @RequestMapping(
+    /*@RequestMapping(
             method = RequestMethod.DELETE,
             value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         logger.info("getting order by id={}", id);
-        orderServiceIml.deleteOrder(id);
-    }
+        orderService.deleteClient(id);
+    }*/
 
     // pageable list
     /*@RequestMapping(method = RequestMethod.GET, value = "")
     public List<Order> list(@RequestParam(value = "page", defaultValue = "0") int page,
                             @RequestParam(value = "size", defaultValue = "10") int size) {
         logger.info("getting orders");
-        return orderServiceIml.list(page, size);
+        return orderService.list(page, size);
     }*/
 
     /*
@@ -103,18 +151,18 @@ public class OrderController {
                             @RequestParam(required=false, value = "size", defaultValue = "10") int size,
                             @RequestBody Map<String, String> sort) {
         logger.info("getting orders sorted by defined params");
-        return orderServiceIml.sortedList(page, size, sort);
+        return orderService.sortedList(page, size, sort);
     }*/
 
-    @RequestMapping(
+    /*@RequestMapping(
             method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Order> sortedList(@RequestParam(required = false, value = "page", defaultValue = "0") int page,
                                   @RequestParam(required = false, value = "size", defaultValue = "10") int size,
                                   @MatrixVariable Map<String, String> sort) {
         logger.info("getting orders sorted by defined params");
-        return orderServiceIml.sortedList(page, size, sort);
-    }
+        return orderService.sortedList(page, size, sort);
+    }*/
 
     /*
       GET /owners/42;q=11;r=12/pets/21;q=22;s=23
@@ -144,10 +192,10 @@ public class OrderController {
       }
     */
 
-    @RequestMapping(method = RequestMethod.GET, value = "/search")
+    /*@RequestMapping(method = RequestMethod.GET, value = "/search")
     @ResponseStatus(HttpStatus.FOUND)
     public List<Order> search(@PathVariable int id) {
         logger.info("updating {}", id);
-        return orderServiceIml.search();
-    }
+        return orderService.search();
+    }*/
 }

@@ -10,11 +10,11 @@ import java.util.Map;
  */
 public interface ClientService {
 
-    public Client saveOrder(Client client);
+    public Client saveClient(Client client);
 
-    public Client findOrder(int id);
+    public Client findClient(int id);
 
-    public void deleteOrder(int id);
+    public void deleteClient(int id);
 
     public List<Client> list(int page, int size);
 

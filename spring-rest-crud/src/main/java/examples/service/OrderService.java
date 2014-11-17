@@ -16,7 +16,7 @@ public interface OrderService {
 
     public void deleteOrder(int id);
 
-    public List<Order> list(int page, int size);
+    public List<Order> list(int client_id, int page, int size);
 
     public List<Order> sortedList(int page, int size, Map<String, String> sort);
 

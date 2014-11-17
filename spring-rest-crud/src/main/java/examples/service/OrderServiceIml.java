@@ -43,11 +43,12 @@ public class OrderServiceIml implements OrderService {
     }
 
     @Override
-    public List<Order> list(int page, int size) {
-        return Lists.newArrayList(orderRepository.findAll(
+    public List<Order> list(int client_id, int page, int size) {
+        return Lists.newArrayList(orderRepository.findByClientId(
+                client_id,
                 new PageRequest(
                         page,
-                        size)).getContent());
+                        size)));
     }
 
     @Override
