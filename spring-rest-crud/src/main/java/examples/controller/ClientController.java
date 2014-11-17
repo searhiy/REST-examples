@@ -31,14 +31,14 @@ public class ClientController {
     @Autowired
     private ProductService productService;
 
-    /*@RequestMapping(
+    @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public Order create(@RequestBody Order order) {
-        logger.info("creating {}", order.toString());
-        return orderService.saveClient(order);
-    }*/
+    public Client createClient(@RequestBody Client client) {
+        logger.info("creating {}", client.toString());
+        return clientService.saveClient(client);
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     public List<Client> listClients(@RequestParam(value = "page", defaultValue = "0") int page,
@@ -187,6 +187,7 @@ public class ClientController {
             @MatrixVariable(pathVar = "account") Map<String, List<String>> accounts) {
 
         // code here
+        // MatrixVariable doesn't work with all web servers, try to enable it in your web server
 
         return "stocks";
       }

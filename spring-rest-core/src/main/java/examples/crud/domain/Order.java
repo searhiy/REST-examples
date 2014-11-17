@@ -70,6 +70,10 @@ public class Order {
         this.products = products;
     }
 
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
