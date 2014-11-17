@@ -122,14 +122,32 @@ public class ClientController {
         return orderService.saveClient(order);
     }*/
 
-    /*@RequestMapping(
+    @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/{id}")
+            value = "/{client_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        logger.info("getting order by id={}", id);
-        orderService.deleteClient(id);
-    }*/
+    public void deleteClient(@PathVariable int client_id) {
+        logger.info("deleting client by id={}", client_id);
+        clientService.deleteClient(client_id);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "/{client_id}/orders/{order_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteOrder(@PathVariable int order_id) {
+        logger.info("deleting client by id={}", order_id);
+        orderService.deleteOrder(order_id);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "/{client_id}/orders/{order_id}/products/{product_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProduct(@PathVariable int product_id) {
+        logger.info("deleting product by id={}", product_id);
+        productService.deleteProduct(product_id);
+    }
 
     // pageable list
     /*@RequestMapping(method = RequestMethod.GET, value = "")
@@ -193,10 +211,22 @@ public class ClientController {
       }
     */
 
-    /*@RequestMapping(method = RequestMethod.GET, value = "/search")
+    @RequestMapping(method = RequestMethod.GET, value = "/search")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Order> search(@PathVariable int id) {
-        logger.info("updating {}", id);
-        return orderService.search();
-    }*/
+    public List<Client> searchClient() {
+        return clientService.search();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "{client_id}/orders/search")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Client> searchOrder(@PathVariable int client_id) {
+        return clientService.search();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "{client_id}/orders/{order_id}/products/search")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Client> searchProduct(@PathVariable int client_id,
+                                      @PathVariable int order_id) {
+        return clientService.search();
+    }
 }
