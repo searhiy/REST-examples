@@ -19,35 +19,23 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <!-- Configures the annotation-driven Spring MVC Controller programming
-        model. Note that, with Spring 3.0, this tag works in Servlet MVC only! -->
-    <!--<mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean id="jacksonHttpMessageConverter"
-                  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="prettyPrint" value="true" />
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>-->
-
     <context:annotation-config/>
-    <!-- Scans the classpath for annotated components that will be auto-registered
-        as Spring beans. For example @Controller and @Service. Make sure to set the
-        correct base-package -->
     <context:component-scan base-package="examples"/>
-
-    <!-- Activate Spring Data JPA repository support -->
     <jpa:repositories base-package="examples"
                       entity-manager-factory-ref="entityManagerFactory"
                       transaction-manager-ref="entityTransactionManager"/>
 
-    <!-- Activate transaction management -->
     <tx:annotation-driven mode="proxy" transaction-manager="entityTransactionManager"/>
 
-    <!-- Declare a view resolver -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp"
           p:order="1"/>
+
+    <bean id="d" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:basenames="classpath:i18n/messages"
+          p:useCodeAsDefaultMessage="true"
+          p:defaultEncoding="UTF-8"
+          p:cacheSeconds="0"/>
 
 </beans>
