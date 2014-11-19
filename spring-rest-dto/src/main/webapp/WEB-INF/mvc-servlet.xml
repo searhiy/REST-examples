@@ -38,4 +38,13 @@
           p:defaultEncoding="UTF-8"
           p:cacheSeconds="0"/>
 
+    <bean id="org.dozer.Mapper" class="org.dozer.DozerBeanMapper">
+        <property name="mappingFiles">
+            <list>
+                <value>dozer-global-configuration.xml</value>
+                <value>dozer-bean-mappings.xml</value>
+            </list>
+        </property>
+    </bean>
+
 </beans>

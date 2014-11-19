@@ -1,45 +1,36 @@
-package examples.dto.domain;
+package examples.v1_0.data;
 
-import com.google.common.collect.Lists;
+import examples.v1_0.validators.Alphabetic;
+import examples.v1_0.validators.MatchingPackageNumbers;
+import examples.v1_0.validators.PackageNumber;
+import examples.v1_0.validators.PhoneNumber;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import javax.validation.Valid;
 
-/**
- * Created by serhii on 18.11.14.
- */
-@Entity
-public class Ticket {
+@MatchingPackageNumbers
+public class TicketVO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Alphabetic
     private String firstName;
 
+    @Alphabetic
     private String lastName;
 
-    @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
+    @Valid
+    private AddressVO address;
 
-    // As of version 2
-    @Column
-    private String email;
-
-    @Column
+    @PhoneNumber
     private String phoneNumber;
 
-    @NotNull
-    @Column(nullable = false)
+    @PackageNumber
     private String packageNumber;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<LocationScan> locationScans = Lists.newArrayList();
+    private String confirmPackageNumber;
 
     public Long getId() {
         return id;
@@ -65,28 +56,20 @@ public class Ticket {
         this.lastName = lastName;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public AddressVO getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressVO address) {
+        this.address = address;
     }
 
     public String getPackageNumber() {
@@ -97,12 +80,12 @@ public class Ticket {
         this.packageNumber = packageNumber;
     }
 
-    public List<LocationScan> getLocationScans() {
-        return locationScans;
+    public String getConfirmPackageNumber() {
+        return confirmPackageNumber;
     }
 
-    public void setLocationScans(List<LocationScan> locationScans) {
-        this.locationScans = locationScans;
+    public void setConfirmPackageNumber(String confirmPackageNumber) {
+        this.confirmPackageNumber = confirmPackageNumber;
     }
 
     @Override
