@@ -22,6 +22,8 @@ public class Fixtures {
     @Autowired
     private LocationDAO locationDao;
 
+    // just info how to set profile from env. variable
+    // -Dspring.profiles.active="standalone"
     @PostConstruct
     public void run() {
         // Locations
