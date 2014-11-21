@@ -1,21 +1,30 @@
 package examples.client.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 
 /**
  * Created by serhii on 19.11.14.
  */
 @Entity
+@Table(name = "items")
+@JsonAutoDetect(fieldVisibility=JsonAutoDetect.Visibility.NONE)
 public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty
     private Long id;
+    @JsonProperty
+    @Column
     private String name;
+    @JsonProperty
+    @Column
     private String param1;
+    @JsonProperty
+    @Column
     private String param2;
 
     public Long getId() {

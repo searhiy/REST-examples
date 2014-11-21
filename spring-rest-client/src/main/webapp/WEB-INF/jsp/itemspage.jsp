@@ -29,12 +29,12 @@
 			<td><c:out value="${item.name}" /></td>
 			<td><c:out value="${item.param1}" /></td>
 			<td><c:out value="${item.param2}" /></td>
-			<%--<td><a href="${editUrl}">Edit</a></td>
+			<td><a href="${editUrl}">Edit</a></td>
 			<td><a href="${deleteUrl}">Delete</a></td>
-			<td><a href="${addUrl}">Add</a></td>
-			<td><a href="${getUrl}">Get</a></td>--%>
+			<td><a href="${getUrl}">Get</a></td>
 		</tr>
 	</c:forEach>
+	<a href="${addUrl}">Add Item</a>
 	</tbody>
 </table>
 

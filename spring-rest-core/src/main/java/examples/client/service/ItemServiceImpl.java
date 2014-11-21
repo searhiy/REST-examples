@@ -12,10 +12,9 @@ import java.util.List;
 /**
  * Created by serhii on 19.11.14.
  */
-@Service
+@Service("item_service")
 public class ItemServiceImpl implements ItemService {
 
-    @Qualifier("itemRepository")
     @Autowired
     private ItemRepository itemRepository;
 

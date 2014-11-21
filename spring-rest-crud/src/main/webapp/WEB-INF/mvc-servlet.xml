@@ -19,17 +19,6 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <!-- Configures the annotation-driven Spring MVC Controller programming
-        model. Note that, with Spring 3.0, this tag works in Servlet MVC only! -->
-    <!--<mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean id="jacksonHttpMessageConverter"
-                  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="prettyPrint" value="true" />
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>-->
-
     <context:annotation-config/>
     <!-- Scans the classpath for annotated components that will be auto-registered
         as Spring beans. For example @Controller and @Service. Make sure to set the
