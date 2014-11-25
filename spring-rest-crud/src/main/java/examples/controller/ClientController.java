@@ -56,6 +56,18 @@ public class ClientController {
         return clientService.findClient(client_id);
     }
 
+    /*
+    with matrix variables
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/{client_id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Client gettingClient(@PathVariable int client_id,
+                                @MatrixVariable Map<String, String> params) {
+        logger.info("reading client by id={}", client_id);
+        return clientService.findClient(client_id);
+    }*/
+
     @RequestMapping(method = RequestMethod.GET, value = "/{client_id}/orders")
     public List<Order> listOrders(@PathVariable int client_id,
                             @RequestParam(value = "page", defaultValue = "0") int page,
@@ -172,7 +184,9 @@ public class ClientController {
         return orderService.sortedList(page, size, sort);
     }*/
 
-    /*@RequestMapping(
+    /*
+    NOTE: you cannot use matrix variables with request params together, see example below
+    @RequestMapping(
             method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Order> sortedList(@RequestParam(required = false, value = "page", defaultValue = "0") int page,

@@ -19,6 +19,9 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
+    <!-- set true to enable matrix variables support -->
+    <mvc:annotation-driven enable-matrix-variables="false"/>
+
     <context:annotation-config/>
     <!-- Scans the classpath for annotated components that will be auto-registered
         as Spring beans. For example @Controller and @Service. Make sure to set the
