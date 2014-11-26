@@ -31,7 +31,7 @@ public class AtomUtil {
 		for(Organization organization : organizations) {
 			StreamResult result = new StreamResult(new ByteArrayOutputStream());
 			
-			marshaller.setMarshallerProperties(marshallerProperties);
+			/*marshaller.setMarshallerProperties(marshallerProperties);*/
 			marshaller.marshal(organization, result);
 			String xml = result.getOutputStream().toString();
 			
