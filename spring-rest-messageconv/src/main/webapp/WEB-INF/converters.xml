@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/util
+                        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="jsonMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
+          p:supportedMediaTypes="#{T(org.springframework.http.MediaType).APPLICATION_JSON_VALUE}"/>
+
+    <!-- You can use there another marshaller, i.e. castor, xstream -->
+    <bean id="xmlMessageConverter"
+          class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"
+          p:supportedMediaTypes="#{T(org.springframework.http.MediaType).APPLICATION_XML_VALUE}">
+        <constructor-arg ref="jaxbMarshaller"/>
+    </bean>
+
+    <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>examples.messageconv.domain.Organization</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jaxb2CollectionMessageConverter"
+          class="org.springframework.http.converter.xml.Jaxb2CollectionHttpMessageConverter"/>
+
+    <bean id="byteArrayMessageConverter"
+          class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+
+    <bean id="stringMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter"/>
+
+    <bean id="resourceMessageConverter"
+          class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+
+    <bean id="sourceMessageConverter"
+          class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+
+    <bean id="atomFeedMessageConverter"
+          class="org.springframework.http.converter.feed.AtomFeedHttpMessageConverter"/>
+
+    <bean id="rssChannelMessageConverter"
+          class="org.springframework.http.converter.feed.RssChannelHttpMessageConverter"/>
+
+    <bean id="xmlAwareFormHttpMessageConverter"
+          class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter"/>
+
+    <util:list id="converters" value-type="org.springframework.http.converter.HttpMessageConverter">
+        <ref bean="jsonMessageConverter"/>
+        <ref bean="xmlMessageConverter"/>
+        <ref bean="jaxb2CollectionMessageConverter"/>
+        <ref bean="byteArrayMessageConverter"/>
+        <ref bean="stringMessageConverter"/>
+        <ref bean="resourceMessageConverter"/>
+        <ref bean="sourceMessageConverter"/>
+        <ref bean="atomFeedMessageConverter"/>
+        <ref bean="rssChannelMessageConverter"/>
+    </util:list>
+
+    <!-- Configure to plugin JSON as request and response in method handler -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"
+          p:messageConverters-ref="converters"/>
+
+    <!--checking extensions -->
+    <!--<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="mediaTypes">
+            <value>
+                xml=application/xml
+                json=application/json
+            </value>
+        </property>
+    </bean>-->
+
+</beans>
