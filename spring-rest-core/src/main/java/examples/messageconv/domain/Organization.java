@@ -3,13 +3,12 @@ package examples.messageconv.domain;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Created by serhii on 25.11.14.
  */
 @Entity(name = "organizations")
-@XmlRootElement
+@XmlRootElement(name = "organization")
 public class Organization {
 
     @Id
@@ -18,23 +17,22 @@ public class Organization {
     private Long id;
 
     @Column
-    private String organizationName;
+    private String name;
 
     public Long getId() {
         return id;
     }
 
-    @XmlTransient
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getOrganizationName() {
-        return organizationName;
+    public String getName() {
+        return name;
     }
 
-    @XmlElement(name = "organizationName")
-    public void setOrganizationName(String organizationName) {
-        this.organizationName = organizationName;
+    @XmlElement(name = "name")
+    public void setName(String name) {
+        this.name = name;
     }
 }
