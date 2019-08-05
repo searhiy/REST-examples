@@ -8,3 +8,7 @@ This project contains following modules:
 * spring-jax-rs
 
 You can launch each module with jetty plugin.
+
+Build project:
+
+`mvn install -DskipTests`
